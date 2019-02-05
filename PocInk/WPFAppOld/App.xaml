@@ -1,8 +1,8 @@
-﻿<Application x:Class="PocInk.App"
+﻿<Application x:Class="WPFAppOld.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PocInk"
-             StartupUri="Views/MainWindow.xaml">
+             xmlns:local="clr-namespace:WPFAppOld"
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
          
     </Application.Resources>
