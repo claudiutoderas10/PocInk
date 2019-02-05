@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PocInkDataLayer\PocInkDataLayer.csproj" />
+    <ProjectReference Include="..\PocInkDataLayer\PocInkDAL.csproj" />
   </ItemGroup>
 
 </Project>

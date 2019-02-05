@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using PocInkDataLayer;
 using PocInkDataLayer.Models;
+using PocInkDAL.Services;
 
 namespace PocInk
 {
@@ -22,9 +17,16 @@ namespace PocInk
     /// </summary>
     public partial class MainWindow : Window
     {
+        private IUserRepository _userRepository;
+        private IInkDrawingRepository _inkDrawingRepository;
+
         public MainWindow()
         {
             InitializeComponent();
+            var dbContext = new PocInkDBContext();
+
+            _userRepository = new UserRepository(dbContext);
+            _inkDrawingRepository = new InkDrawingRepository(dbContext);
 
             //This will be removed,only added to see if database works
             TestDb();
@@ -32,28 +34,30 @@ namespace PocInk
 
         private void TestDb()
         {
-            using (var context = new PocInkDBContext())
+            if (!_userRepository.GetUsers().Any())
             {
-                if (!context.Users.Any())
-                {
-                    context.Users.Add(new User { Id = Guid.NewGuid(), UserName = "Admin", Password = "12345" });
-                }
-
-                if (!context.InkDrawings.Any())
-                {
-                    context.InkDrawings.Add(new InkDrawing { DrawingId = Guid.NewGuid(), LocalFileId = 1, Title = "Cel mai frumos desen" });
-                }
-
-                context.SaveChanges();
-
-                DrawingTitleTextBlock.Text = context.InkDrawings.FirstOrDefault().Title;
-                UserNameTextBlock.Text = context.Users.FirstOrDefault().UserName;
-
-
+                _userRepository.InsertUser(new User { Id = Guid.NewGuid(), UserName = "Admin", Password = "12345" });
             }
 
+            if (!_inkDrawingRepository.GetInkDrawings().Any())
+            {
+                _inkDrawingRepository.InsertInkDrawing(new InkDrawing { DrawingId = Guid.NewGuid(), Title = "Cel mai frumos desen" });
+            }
+
+            _userRepository.Save();
+            _inkDrawingRepository.Save();
+
+
+            var users = _userRepository.GetUsers();
+            var inkDrawings = _inkDrawingRepository.GetInkDrawings();
+
+            UserNameTextBlock.Text = users.FirstOrDefault().UserName;
+            DrawingTitleTextBlock.Text = inkDrawings.FirstOrDefault().Title;
+
+            _userRepository.Dispose();
+            _inkDrawingRepository.Dispose();
         }
 
-
     }
+
 }

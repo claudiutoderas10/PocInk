@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocInk", "PocInk\PocInk.csproj", "{A33F03AE-919A-44F8-9CAD-9DB01ABE7394}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocInk", "PocInk\PocInk.csproj", "{A33F03AE-919A-44F8-9CAD-9DB01ABE7394}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocInkDataLayer", "PocInkDataLayer\PocInkDataLayer.csproj", "{E6B1A116-3F46-49CA-81E7-5DDDFDCEDD6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocInkDAL", "PocInkDataLayer\PocInkDAL.csproj", "{E6B1A116-3F46-49CA-81E7-5DDDFDCEDD6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
