@@ -19,7 +19,7 @@ steps:
 
 - task: DotNetCoreInstaller@0
   inputs:
-    version: '3.0.0-preview-27324-5' # replace this value with the version that you need for your project
+    version: '2.2.0' # replace this value with the version that you need for your project
 
 - task: NuGetCommand@2
   inputs:
