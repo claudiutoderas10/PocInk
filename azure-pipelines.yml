@@ -17,6 +17,10 @@ variables:
 steps:
 - task: NuGetToolInstaller@0
 
+- task: DotNetCoreInstaller@0
+  inputs:
+    version: '3.0.100' # replace this value with the version that you need for your project
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
@@ -31,3 +35,5 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+
