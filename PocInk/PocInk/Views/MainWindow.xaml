@@ -15,7 +15,7 @@
 
         <TextBlock Margin="15"
                    x:Name="DrawingTitleTextBlock"
-                   Width="151"
+                   Width="150"
                    Height="45"/>
 
     </StackPanel>
