@@ -12,8 +12,8 @@ namespace PocInk.Authentication
         public User AuthenticateUser(string username, string password)
         {
             var users = new List<User>();
-            users.Add(new User { Id = Guid.NewGuid(), UserName = "Mark", Email = "markCom@.com", HashedPassword = "MB5PYIsbI2YzCUe34Q5ZU2VferIoI4Ttd+ydolWV0OE=", Roles = new string[] { "Administrators" } });
-            users.Add(new User { Id = Guid.NewGuid(), UserName = "John", Email = "john@.com", HashedPassword = "hMaLizwzOQ5LeOnMuj+C6W75Zl5CXXYbwDSHWW9ZOXc=", Roles = new string[] { } });
+            users.Add(new User { Id = Guid.NewGuid(), UserName = "Mark", Email = "markCom@.com", HashedPassword = "MB5PYIsbI2YzCUe34Q5ZU2VferIoI4Ttd+ydolWV0OE=", Role = "Administrators" });
+            users.Add(new User { Id = Guid.NewGuid(), UserName = "John", Email = "john@.com", HashedPassword = "hMaLizwzOQ5LeOnMuj+C6W75Zl5CXXYbwDSHWW9ZOXc="});
 
 
             User userData = users.FirstOrDefault(u => u.UserName.Equals(username)
@@ -21,7 +21,7 @@ namespace PocInk.Authentication
             if (userData == null)
                 throw new UnauthorizedAccessException("Access denied. Please provide some valid credentials.");
 
-            return new User { UserName = userData.UserName, Email = userData.Email, Roles = userData.Roles };
+            return new User { UserName = userData.UserName, Email = userData.Email, Role = userData.Role };
         }
 
         private string CalculateHash(string clearTextPassword, string salt)

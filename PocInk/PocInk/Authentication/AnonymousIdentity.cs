@@ -5,7 +5,7 @@ namespace PocInk.Authentication
     public class AnonymousIdentity : UserIdentity
     {
         public AnonymousIdentity()
-            : base(string.Empty, string.Empty, new string[] { })
+            : base(string.Empty, string.Empty, string.Empty)
         { }
     }
 }

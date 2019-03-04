@@ -10,7 +10,7 @@ namespace PocInkDataLayer.Models
         public string UserName { get; set; }
         public string Email { get; set; }
         public string HashedPassword { get; set; }
-        public string[] Roles { get; set; }
+        public string Role { get; set; }
       
     }
 }

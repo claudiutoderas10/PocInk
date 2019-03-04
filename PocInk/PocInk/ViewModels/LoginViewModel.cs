@@ -83,7 +83,7 @@ namespace PocInk.ViewModels
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
 
                 //Authenticate the user
-                userPrincipal.Identity = new UserIdentity(user.UserName, user.Email, user.Roles);
+                userPrincipal.Identity = new UserIdentity(user.UserName, user.Email, user.Role);
 
             }
 
