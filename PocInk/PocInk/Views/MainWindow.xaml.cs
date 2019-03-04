@@ -36,7 +36,7 @@ namespace PocInk
         {
             if (!_userRepository.GetUsers().Any())
             {
-                _userRepository.InsertUser(new User { Id = Guid.NewGuid(), UserName = "Admin", Password = "12345" });
+                _userRepository.InsertUser(new User { Id = Guid.NewGuid(), UserName = "Admin", HashedPassword = "12345" });
             }
 
             if (!_inkDrawingRepository.GetInkDrawings().Any())
