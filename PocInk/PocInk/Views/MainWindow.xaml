@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:PocInk"
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="800">
-    <Grid>
-        
-    </Grid>
+
+    <StackPanel>
+        <TextBlock Margin="15"
+                       x:Name="UserNameTextBlock"
+                       Width="150"
+                       Height="45"/>
+
+        <TextBlock Margin="15"
+                   x:Name="DrawingTitleTextBlock"
+                   Width="150"
+                   Height="45"/>
+
+    </StackPanel>
+
 </Window>
