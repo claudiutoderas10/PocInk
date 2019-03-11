@@ -1,4 +1,6 @@
-﻿using PocInkDataLayer.Models;
+﻿using PocInkDAL.Services;
+using PocInkDataLayer;
+using PocInkDataLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +11,14 @@ namespace PocInk.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
+        private IUserRepository _userRepository;
+        public AuthenticationService()
+        {
+            _userRepository = new UserRepository(new PocInkDBContext());
+        }
         public User AuthenticateUser(string username, string password)
         {
-            var users = new List<User>();
-            users.Add(new User { Id = Guid.NewGuid(), UserName = "Mark", Email = "markCom@.com", HashedPassword = "MB5PYIsbI2YzCUe34Q5ZU2VferIoI4Ttd+ydolWV0OE=", Role = "Administrators" });
-            users.Add(new User { Id = Guid.NewGuid(), UserName = "John", Email = "john@.com", HashedPassword = "hMaLizwzOQ5LeOnMuj+C6W75Zl5CXXYbwDSHWW9ZOXc="});
-
-
-            User userData = users.FirstOrDefault(u => u.UserName.Equals(username)
+            User userData = GetUsers().FirstOrDefault(u => u.UserName.Equals(username)
                  && u.HashedPassword.Equals(CalculateHash(password, u.UserName)));
             if (userData == null)
                 throw new UnauthorizedAccessException("Access denied. Please provide some valid credentials.");
@@ -33,6 +35,13 @@ namespace PocInk.Authentication
             byte[] hash = algorithm.ComputeHash(saltedHashBytes);
             // Return the hash as a base64 encoded string to be compared to the stored password
             return Convert.ToBase64String(hash);
+        }
+
+        private List<User> GetUsers()
+        {
+            var users = _userRepository.GetUsers();
+            _userRepository.Dispose();
+            return users.ToList();
         }
     }
 }

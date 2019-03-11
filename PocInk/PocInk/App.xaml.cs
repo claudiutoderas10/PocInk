@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using PocInk.Authentication;
+using System;
+using System.Windows;
 
 namespace PocInk
 {
@@ -9,7 +11,9 @@ namespace PocInk
     {
         public App()
         {
-            Bootstrap.RegisterDependencies();
+            UserPrincipal userPrincipal = new UserPrincipal();
+            AppDomain.CurrentDomain.SetThreadPrincipal(userPrincipal);
+            Bootstrap.RegisterDependencies();           
         }
     }
 }

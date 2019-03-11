@@ -6,19 +6,33 @@
         xmlns:local="clr-namespace:PocInk"
         mc:Ignorable="d"
         DataContext="{Binding Path=LoginInstance,Source={StaticResource ViewModelLocator}}"
-        Title="MainWindow" Height="400" Width="800">
+        Title="Login" Height="400" Width="800">
 
-    <StackPanel>
-        <TextBlock Margin="15"
-                       x:Name="UserNameTextBlock"
-                       Width="150"
-                       Height="45"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Height="250" Width="600">
+            <TextBox  Width="150"
+                    Text="{Binding Username,Mode=TwoWay}"
+                    Height="45"/>
 
-        <TextBlock Margin="15"
-                   x:Name="DrawingTitleTextBlock"
-                   Width="150"
-                   Height="45"/>
+            <TextBox  Width="150"
+                      Text="{Binding Password,Mode=TwoWay}"
+                    Height="45"/>
 
-    </StackPanel>
+            <TextBlock  Width="150"
+                        TextWrapping="Wrap"
+                    Text="{Binding Status,UpdateSourceTrigger=PropertyChanged}"                    
+                    Height="45"/>
+        </StackPanel>
+
+        <Button     Width="100"
+                    Command="{Binding LoginCommand}"           
+                    Content="Login"
+                    Grid.Row="1"
+                    Height="45"/>
+    </Grid>
 
 </Window>
