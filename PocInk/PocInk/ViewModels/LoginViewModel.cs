@@ -1,18 +1,20 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using PocInk.Authentication;
-using PocInkDataLayer.Models;
-using System;
-using System.Threading;
+using PocInk.Navigation;
 
 namespace PocInk.ViewModels
 {
     public class LoginViewModel : PocInkViewModelBase
     {
         private readonly IAuthenticationService _authenticationService;
+        private readonly INavigationService _navigationService;
+
         private string _username;
         private string _password;
 
         private string _status;
+
 
         public RelayCommand LoginCommand { get; }
 
@@ -32,27 +34,38 @@ namespace PocInk.ViewModels
         {
             get { return _status; }
             set { SetProperty(nameof(Status), ref _status, value); }
-        }             
+        }
 
-        public LoginViewModel(IAuthenticationService authenticationService)
+        public LoginViewModel(IAuthenticationService authenticationService, INavigationService navigationService)
         {
             _authenticationService = authenticationService;
-            LoginCommand = new RelayCommand(Login,AuthenticationHelper.CanLogin);
+            _navigationService = navigationService;
+            LoginCommand = new RelayCommand(Login, AuthenticationHelper.CanLogin);
         }
 
         private void Login()
         {
             AuthenticationHelper.Login(_authenticationService, Username, Password);
-            Status=AuthenticationHelper.GetCurrentLoggedInUser();
+            Status = AuthenticationHelper.GetCurrentLoggedInUser();
             NavigateToMainPage();
 
         }
         private void NavigateToMainPage()
         {
-            ////if(IsAuthenticated)
-            ////{
-            ////    // navigate
-            ////}
+            if (AuthenticationHelper.IsAuthenticated)
+            {
+                SimpleIoc.Default.GetInstance<INavigationService>().NavigateTo<DrawingsExplorerViewModel>(null);
+            }
+        }
+
+        public override void OnNavigatedTo(object parameter = null)
+        {
+
+        }
+
+        public override void OnNavigatingTo(object parameter = null)
+        {
+            //cleanup
         }
     }
 }

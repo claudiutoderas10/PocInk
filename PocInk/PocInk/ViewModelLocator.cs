@@ -5,9 +5,12 @@ namespace PocInk
 {
     public class ViewModelLocator
     {
-        public LoginViewModel LoginInstance
+        public MainViewModel MainViewModelInstance
         {
-            get=> SimpleIoc.Default.GetInstance<LoginViewModel>();                    
+            get
+            {
+                return SimpleIoc.Default.GetInstance<MainViewModel>();
+            }
         }
     }
 }

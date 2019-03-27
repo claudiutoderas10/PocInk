@@ -5,20 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PocInk"
         mc:Ignorable="d"
+        DataContext="{Binding Path=MainViewModelInstance,Source={StaticResource ViewModelLocator}}"
         Title="MainWindow" Height="400" Width="800">
 
-    <StackPanel>
-        <TextBlock Margin="15"
-                       x:Name="UserNameTextBlock"
-                       Width="150"
-                       Height="45"/>
+    <Frame x:Name="Frame"  NavigationUIVisibility="Hidden">
 
-        <TextBlock Margin="15"
-                   x:Name="DrawingTitleTextBlock"
-                   Width="150"
-                   Height="45"/>
-        
-    </StackPanel>
+    </Frame>
     
-
 </Window>

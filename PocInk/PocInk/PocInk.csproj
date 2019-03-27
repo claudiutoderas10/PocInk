@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Views\LoginWindow.xaml" />
+    <None Remove="Views\DrawingsExplorerPage.xaml" />
+    <None Remove="Views\LoginPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Views\LoginWindow.xaml">
+    <Page Update="Views\DrawingsExplorerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

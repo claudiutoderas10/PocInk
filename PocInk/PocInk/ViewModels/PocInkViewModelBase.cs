@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace PocInk.ViewModels
 {
-    public class PocInkViewModelBase:ViewModelBase
+    public abstract class PocInkViewModelBase:ViewModelBase
     {
         public bool SetProperty<T>(string propertyName, ref T field, T newValue = default(T), List<RelayCommand> commands = null, bool broadcast = false)
         {
@@ -15,5 +15,8 @@ namespace PocInk.ViewModels
             commands?.ForEach(x => x.RaiseCanExecuteChanged());
             return true;
         }
+
+        public abstract void OnNavigatedTo(object parameter = null);
+        public abstract void OnNavigatingTo(object parameter = null);
     }
 }

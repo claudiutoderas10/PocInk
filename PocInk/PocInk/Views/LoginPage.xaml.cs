@@ -1,10 +1,10 @@
-﻿using System.Windows;
+﻿using System.Windows.Controls;
 
 namespace PocInk
 {    
-    public partial class LoginWindow : Window
+    public partial class LoginPage : Page
     { 
-        public LoginWindow()
+        public LoginPage()
         {
             InitializeComponent();         
         }

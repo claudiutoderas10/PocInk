@@ -1,59 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using PocInkDataLayer;
-using PocInkDataLayer.Models;
-using PocInkDAL.Services;
+﻿using System.Windows;
+using System.Windows.Controls;
+using PocInk.ViewModels;
 
 namespace PocInk
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+{    
     public partial class MainWindow : Window
-    {
-        private IUserRepository _userRepository;
-        private IInkDrawingRepository _inkDrawingRepository;
-
+    {       
         public MainWindow()
         {
             InitializeComponent();
-            var dbContext = new PocInkDBContext();
-
-            _userRepository = new UserRepository(dbContext);
-            _inkDrawingRepository = new InkDrawingRepository(dbContext);
-
-            //This will be removed,only added to see if database works
-            TestDb();
+            ((MainViewModel)DataContext).ShowLoginView(); // we need to have our view loaded to start navigating
+            Frame.LoadCompleted += (s, e) => UpdateFrameDataContext();
+            Frame.DataContextChanged += (s, e) => UpdateFrameDataContext();
         }
 
-        private void TestDb()
+
+        private void UpdateFrameDataContext()
         {
-            if (!_userRepository.GetUsers().Any())
+            Page view = (Page)Frame.Content;
+            if (view != null)
             {
-                _userRepository.InsertUser(new User { Id = Guid.NewGuid(), UserName = "Admin", HashedPassword = "12345" });
+                view.DataContext = Frame.DataContext;
             }
-
-            if (!_inkDrawingRepository.GetInkDrawings().Any())
-            {
-                _inkDrawingRepository.InsertInkDrawing(new InkDrawing { DrawingId = Guid.NewGuid(), Title = "Cel mai frumos desen" });
-            }
-
-            _userRepository.Save();
-            _inkDrawingRepository.Save();
-
-
-            var users = _userRepository.GetUsers();
-            var inkDrawings = _inkDrawingRepository.GetInkDrawings();
-
-            UserNameTextBlock.Text = users.FirstOrDefault().UserName;
-            DrawingTitleTextBlock.Text = inkDrawings.FirstOrDefault().Title;
-
-            _userRepository.Dispose();
-            _inkDrawingRepository.Dispose();
         }
-
+               
     }
 
 }
