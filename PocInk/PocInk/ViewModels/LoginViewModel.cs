@@ -47,14 +47,14 @@ namespace PocInk.ViewModels
         {
             AuthenticationHelper.Login(_authenticationService, Username, Password);
             Status = AuthenticationHelper.GetCurrentLoggedInUser();
-            NavigateToMainPage();
+            NavigateDrawingExplorer();
 
         }
-        private void NavigateToMainPage()
+        private void NavigateDrawingExplorer()
         {
             if (AuthenticationHelper.IsAuthenticated)
             {
-                SimpleIoc.Default.GetInstance<INavigationService>().NavigateTo<DrawingsExplorerViewModel>(null);
+                _navigationService.NavigateTo<DrawingsExplorerViewModel>(null);
             }
         }
 
