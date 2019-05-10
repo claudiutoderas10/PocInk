@@ -1,10 +1,10 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
-using PocInk.Authentication;
-using PocInk.Navigation;
-using PocInk.ViewModels;
+using PocInkOld.Authentication;
+using PocInkOld.Navigation;
+using PocInkOld.ViewModels;
 
-namespace PocInk
+namespace PocInkOld
 {
     public static class Bootstrap
     {
@@ -19,7 +19,6 @@ namespace PocInk
         {
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
-            SimpleIoc.Default.Register<AdminViewModel>();
             SimpleIoc.Default.Register<DrawingsExplorerViewModel>();
 
         }
@@ -37,9 +36,7 @@ namespace PocInk
             var navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             navigationService.AddNavigableElement(SimpleIoc.Default.GetInstance<LoginViewModel>);
             navigationService.AddNavigableElement(SimpleIoc.Default.GetInstance<DrawingsExplorerViewModel>);
-            navigationService.AddNavigableElement(SimpleIoc.Default.GetInstance<AdminViewModel>);
-
-
+          
         }
     }
 }

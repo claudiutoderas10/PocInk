@@ -8,12 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\home.png" />
+    <None Remove="Views\AdminPage.xaml" />
     <None Remove="Views\DrawingsExplorerPage.xaml" />
     <None Remove="Views\LoginPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.4" />
+    <PackageReference Include="MaterialDesignThemes" Version="2.5.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.2" />
     <PackageReference Include="Microsoft.Toolkit.Wpf.UI.Controls" Version="6.0.0-preview4.1" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
@@ -24,12 +27,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Views\AdminPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\DrawingsExplorerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Update="Views\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\home.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

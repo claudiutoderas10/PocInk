@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"          
         xmlns:uwpControls="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls"
-       xmlns:xamlhost="clr-namespace:Microsoft.Toolkit.Wpf.UI.XamlHost;assembly=Microsoft.Toolkit.Wpf.UI.XamlHost"
-      xmlns:x1="clr-namespace:System.Windows.Markup;assembly=System.Xaml"
-      Title="Login" Height="400" Width="800">
+        xmlns:xamlhost="clr-namespace:Microsoft.Toolkit.Wpf.UI.XamlHost;assembly=Microsoft.Toolkit.Wpf.UI.XamlHost"
+        xmlns:x1="clr-namespace:System.Windows.Markup;assembly=System.Xaml"
+        Title="Login" Height="400" Width="800">
 
     <Grid>
         <Grid.RowDefinitions>

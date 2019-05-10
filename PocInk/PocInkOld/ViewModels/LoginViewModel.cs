@@ -1,8 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using PocInk.Authentication;
-using PocInk.Navigation;
+using GalaSoft.MvvmLight.Ioc;
+using PocInkOld.Authentication;
+using PocInkOld.Navigation;
 
-namespace PocInk.ViewModels
+namespace PocInkOld.ViewModels
 {
     public class LoginViewModel : PocInkViewModelBase
     {
@@ -11,7 +12,9 @@ namespace PocInk.ViewModels
 
         private string _username;
         private string _password;
+
         private string _status;
+
 
         public RelayCommand LoginCommand { get; }
 
@@ -44,16 +47,7 @@ namespace PocInk.ViewModels
         {
             AuthenticationHelper.Login(_authenticationService, Username, Password);
             Status = AuthenticationHelper.GetCurrentLoggedInUser();
-
-            if (AuthenticationHelper.IsAdminLoggedIn())
-            {
-                NavigateToAdminView();
-            }
-            else
-            {
-                NavigateDrawingExplorer();
-
-            }
+            NavigateDrawingExplorer();
 
         }
         private void NavigateDrawingExplorer()
@@ -61,13 +55,6 @@ namespace PocInk.ViewModels
             if (AuthenticationHelper.IsAuthenticated)
             {
                 _navigationService.NavigateTo<DrawingsExplorerViewModel>(null);
-            }
-        }
-        private void NavigateToAdminView()
-        {
-            if (AuthenticationHelper.IsAuthenticated)
-            {
-                _navigationService.NavigateTo<AdminViewModel>(null);
             }
         }
 
