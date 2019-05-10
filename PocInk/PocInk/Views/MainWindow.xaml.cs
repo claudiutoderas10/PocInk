@@ -13,8 +13,7 @@ namespace PocInk
             Frame.LoadCompleted += (s, e) => UpdateFrameDataContext();
             Frame.DataContextChanged += (s, e) => UpdateFrameDataContext();
         }
-
-
+        
         private void UpdateFrameDataContext()
         {
             Page view = (Page)Frame.Content;
