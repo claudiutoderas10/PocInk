@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"          
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d"          
         Title="Login">
 
     <Page.Resources>
@@ -40,18 +41,24 @@
                     HorizontalAlignment="Stretch">
             <TextBlock Text="Username" Margin="15" FontSize="15"/>
             <TextBlock Text="Email" Margin="15" FontSize="15"/>
-            <TextBlock Text="Role" Margin="15" FontSize="15"/>
-            <Button Content="Save" Margin="15" FontSize="15"/>
+            <TextBlock Text="Role" Margin="15" FontSize="15"/>         
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Width="250" Grid.Column="0" Margin="25" HorizontalAlignment="Right">
-            <TextBox Text="{Binding Username,Mode=TwoWay}" Margin="15" 
+        <StackPanel Orientation="Vertical" 
+                    Width="250"
+                    Grid.Column="0" 
+                    Margin="25" 
+                    HorizontalAlignment="Right">
+            <TextBox Text="{Binding Username,Mode=TwoWay}"
+                     Margin="15" 
                      FontSize="15"/>
-            <TextBox Text="{Binding Email,Mode=TwoWay}" Margin="15" 
+            <TextBox Text="{Binding Email,Mode=TwoWay}" 
+                     Margin="15" 
                      FontSize="15"/>
             <ComboBox ItemsSource="{Binding Roles}"
                       SelectedItem="{Binding SelectedRole,Mode=TwoWay}"
-                      Margin="15" FontSize="15"/>
+                      Margin="15" 
+                      FontSize="15"/>
         </StackPanel>
 
 
@@ -61,6 +68,33 @@
                    Margin="25"
                    FontSize="25"
                    Text="Remove User"/>
+        <ListView ItemsSource="{Binding Users}"
+                  Grid.Column="1"
+                  Width="700"
+                  x:Name="userListView"
+                  Margin="25,100,25,25"
+                  HorizontalAlignment="Center"               
+                  SelectedItem="{Binding SelectedUser}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="600" Text="{Binding UserName}"/>
+                        <Button HorizontalAlignment="Right" Command="{Binding ElementName=userListView,Path=DataContext.RemoveUser}" CommandParameter="{Binding Id}">
+                            <materialDesign:PackIcon Kind="Delete" Height="24" Width="24" />
+                        </Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+        <Button  Margin="15"
+                 FontSize="15" 
+                 HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Bottom" 
+                 Grid.ColumnSpan="2">
+            <materialDesign:PackIcon Kind="ContentSave" Height="24" Width="24" />
+        </Button>
 
     </Grid>
 </Page>
