@@ -37,7 +37,7 @@ namespace PocInk.ViewModels
         {
             _authenticationService = authenticationService;
             _navigationService = navigationService;
-            LoginCommand = new RelayCommand(Login, AuthenticationHelper.CanLogin);
+            LoginCommand = new RelayCommand(Login);
         }
 
         private void Login()
@@ -54,6 +54,7 @@ namespace PocInk.ViewModels
                 NavigateDrawingExplorer();
 
             }
+                        
 
         }
         private void NavigateDrawingExplorer()
@@ -78,7 +79,9 @@ namespace PocInk.ViewModels
 
         public override void OnNavigatingTo(object parameter = null)
         {
-            //cleanup
+            Username = string.Empty;
+            Password = string.Empty;
+
         }
     }
 }

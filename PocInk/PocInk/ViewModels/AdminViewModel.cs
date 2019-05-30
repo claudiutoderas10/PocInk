@@ -1,6 +1,6 @@
-﻿
-using GalaSoft.MvvmLight.Command;
-using PocInk.Helpers;
+﻿using GalaSoft.MvvmLight.Command;
+using PocInk.Authentication;
+using PocInk.Navigation;
 using PocInkDAL.Models;
 using PocInkDAL.Services;
 using PocInkDataLayer;
@@ -13,6 +13,7 @@ namespace PocInk.ViewModels
 {
     public class AdminViewModel : PocInkViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private IUserRepository _userRepository;
         private string _username;
         private string _email;
@@ -56,14 +57,19 @@ namespace PocInk.ViewModels
         }
 
         public RelayCommand SaveCommand { get; }
+        public RelayCommand GoBack { get; }
 
         public RelayCommand<Guid> RemoveUser { get; }
 
-        public AdminViewModel()
+        public AdminViewModel(INavigationService navigationService)
         {
+
+            _navigationService = navigationService;
             _userRepository = new UserRepository(new PocInkDBContext());
 
             SaveCommand = new RelayCommand(OnSave);
+            GoBack = new RelayCommand(OnGoBack);
+
             RemoveUser = new RelayCommand<Guid>(OnRemoveUser);
             Roles = new List<string> { Role.Admin.ToString(), Role.User.ToString() };
             Users = GetUsers();
@@ -76,7 +82,13 @@ namespace PocInk.ViewModels
 
         public override void OnNavigatingTo(object parameter = null)
         {
+            _userRepository.Dispose();
+        }
 
+
+        private void OnGoBack()
+        {
+            _navigationService.NavigateTo<LoginViewModel>(null);
         }
 
         private List<User> GetUsers()
@@ -88,8 +100,9 @@ namespace PocInk.ViewModels
 
         private void OnRemoveUser(Guid userId)
         {
-            var userToRemove = Users.FirstOrDefault(x => x.Id == userId);           
-            _userRepository.InsertUser(userToRemove);
+            var userToRemove = Users.FirstOrDefault(x => x.Id == userId);
+            _userRepository.DeleteUser(userToRemove.Id);
+
             _userRepository.Save();
             Users = GetUsers();
             RaisePropertyChanged(nameof(Users));
@@ -98,12 +111,19 @@ namespace PocInk.ViewModels
 
         private void OnSave()
         {
-            foreach (var user in Users)
-            {
-                _userRepository.InsertUser(user);
-            }
+            var user = new User { Email = Email, UserName = Username, Role = SelectedRole };
+
+            user.HashedPassword = AuthenticationHelper.CalculateHash("12345", user.UserName);
+
+            _userRepository.InsertUser(user);
             _userRepository.Save();
-        }       
+
+            Username = string.Empty;
+            SelectedRole = string.Empty;
+            Email = string.Empty;
+            Users = GetUsers();
+
+        }
 
     }
 }

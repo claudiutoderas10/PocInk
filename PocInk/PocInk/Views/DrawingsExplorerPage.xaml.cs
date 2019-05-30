@@ -10,13 +10,13 @@ namespace PocInk
         {
             InitializeComponent();         
         }
-        private void InkCanvas_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (sender is Microsoft.Toolkit.Wpf.UI.Controls.InkCanvas)
-            {
-                inkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Pen | CoreInputDeviceTypes.Touch;
-            }
-        }
+        //private void InkCanvas_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    if (sender is Microsoft.Toolkit.Wpf.UI.Controls.InkCanvas)
+        //    {
+        //        inkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Pen | CoreInputDeviceTypes.Touch;
+        //    }
+        //}
 
     }
 

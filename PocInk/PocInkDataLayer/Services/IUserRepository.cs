@@ -9,7 +9,7 @@ namespace PocInkDAL.Services
         IEnumerable<User> GetUsers();
         User GetUserById(int userId);
         void InsertUser(User user);
-        void DeleteUser(int userID);
+        void DeleteUser(Guid userID);
         void UpdateUser(User user);
         void Save();
     }
