@@ -7,17 +7,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PocInkDataLayer;
 
-namespace PocInkDataLayer.Migrations
+namespace PocInkDAL.Migrations
 {
     [DbContext(typeof(PocInkDBContext))]
-    [Migration("20190205122047_CreatePocInkDB")]
-    partial class CreatePocInkDB
+    [Migration("20190304154800_CreateDb")]
+    partial class CreateDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -26,7 +26,7 @@ namespace PocInkDataLayer.Migrations
                     b.Property<Guid>("DrawingId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("LocalFileId");
+                    b.Property<string>("DrawingName");
 
                     b.Property<string>("Title");
 
@@ -42,13 +42,35 @@ namespace PocInkDataLayer.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Email");
+
+                    b.Property<string>("HashedPassword");
+
+                    b.Property<string>("Role");
 
                     b.Property<string>("UserName");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("15215b0e-ca81-4ba7-b829-2fe2e397a6a1"),
+                            Email = "Shakespeare@yahoo.com",
+                            HashedPassword = "MXxgg2ygTwY7KlhyeTZrrgHA0DjYg2r93SKt1pmfASI=",
+                            Role = "Admin",
+                            UserName = "William"
+                        },
+                        new
+                        {
+                            Id = new Guid("04d38a16-924f-47a8-a53d-0f9b3eebc7df"),
+                            Email = "John@yahoo.com",
+                            HashedPassword = "JUZ3HfuAnPDLx5YkeEDcLoe/JXTgre2BUai1nhQ+rWA=",
+                            Role = "",
+                            UserName = "John"
+                        });
                 });
 #pragma warning restore 612, 618
         }

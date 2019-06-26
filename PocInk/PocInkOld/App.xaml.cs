@@ -1,8 +1,7 @@
-﻿using PocInk.Authentication;
-using System;
+﻿using System;
 using System.Windows;
 
-namespace PocInk
+namespace PocInkOld
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -11,9 +10,9 @@ namespace PocInk
     {
         public App()
         {
-            UserPrincipal userPrincipal = new UserPrincipal();
+            Authentication.UserPrincipal userPrincipal = new Authentication.UserPrincipal();
             AppDomain.CurrentDomain.SetThreadPrincipal(userPrincipal);
-            Bootstrap.RegisterDependencies();           
+            Bootstrap.RegisterDependencies();
         }
     }
 }

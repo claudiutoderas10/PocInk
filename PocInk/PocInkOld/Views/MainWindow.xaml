@@ -1,16 +1,14 @@
-﻿<Window x:Class="PocInk.MainWindow"
+﻿<Window x:Class="PocInkOld.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PocInk"
+        xmlns:local="clr-namespace:PocInkOld"
         mc:Ignorable="d"
         DataContext="{Binding Path=MainViewModelInstance,Source={StaticResource ViewModelLocator}}"
-        Title="MainWindow" 
-        WindowState="Maximized">
+        Title="MainWindow" Height="400" Width="800">
 
-     <Frame x:Name="Frame"  NavigationUIVisibility="Hidden">
+    <Frame x:Name="Frame"  NavigationUIVisibility="Hidden">
 
     </Frame>
-    
 </Window>

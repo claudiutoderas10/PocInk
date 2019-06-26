@@ -10,7 +10,7 @@ namespace PocInkDataLayer.Models
         public Guid DrawingId { get; set; }
         public string Title { get; set; }
         public string UserId { get; set; }
-        public int LocalFileId { get; set; }
+        public string DrawingName { get; set; }
 
     }
 }

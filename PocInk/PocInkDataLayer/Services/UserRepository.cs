@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PocInkDataLayer;
@@ -15,7 +16,7 @@ namespace PocInkDAL.Services
             _context = context;
         }
 
-        public void DeleteUser(int userID)
+        public void DeleteUser(Guid userID)
         {
             User user = _context.Users.Find(userID);
             _context.Users.Remove(user);
@@ -32,7 +33,7 @@ namespace PocInkDAL.Services
         }
 
         public void InsertUser(User user)
-        {
+        {          
             _context.Users.Add(user);
         }
 
